@@ -21,7 +21,14 @@ def minimum_maximum(accumulator: Tuple[int, int], element: int) -> Tuple[int, in
 
 
 def counting_sort(*args: int) -> List[int]:
-    """_summary_
+    """
+    Counting sort is efficient if the range of input data
+    is not significantly greater than the number of objects to be sorted.
+
+    for example the input sequence is between range 1 to 10 and the data is 1, 2, 5, 10.
+
+    Time complexity: `O(n)`, where n is total number of elements
+    Auxiliary Space: `O(n)`, It uses a temp array making it a non In Place algorithm.
 
     :return: list of sorted integer number with counting sort algorithm
     :rtype: list[int]
