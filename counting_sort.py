@@ -20,7 +20,7 @@ def minimum_maximum(accumulator: Tuple[int, int], element: int) -> Tuple[int, in
     )
 
 
-def counting_sort(*args: int) -> List[int]:
+def counting_sort(array: List[int]) -> List[int]:
     """
     Counting sort is efficient if the range of input data
     is not significantly greater than the number of objects to be sorted.
@@ -30,12 +30,14 @@ def counting_sort(*args: int) -> List[int]:
     Time complexity: `O(n)`, where n is total number of elements
     Auxiliary Space: `O(n)`, It uses a temp array making it a non In Place algorithm.
 
+    :param array: list of integer numbers that we want sort
+    :type array: list[int]
     :return: list of sorted integer number with counting sort algorithm
     :rtype: list[int]
     """
-    minimum, maximum = reduce(minimum_maximum, args, (args[0], args[0]))
+    minimum, maximum = reduce(minimum_maximum, array, (array[0], array[0]))
     counter = {i: 0 for i in range(minimum, maximum + 1)}  # dictionary comprehension
-    counter.update(Counter(args))
+    counter.update(Counter(array))
 
     result = []
     for key, value in counter.items():
