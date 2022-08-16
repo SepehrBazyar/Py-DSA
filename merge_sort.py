@@ -1,28 +1,6 @@
 from typing import List, Tuple
 
 
-def merge_arrays(one: Tuple[List[int], int], two: Tuple[List[int], int]) -> List[int]:
-    """Used for merging two halves; merges the two sorted sub-arrays into one.
-
-    :param first: a tuple of sub-array and length of array
-    :type first: tuple[list[int], int]
-    :param second: a tuple of sub-array and length of array
-    :type second: tuple[list[int], int]
-    :return: returned the one array merged of two this array
-    :rtype: list[int]
-    """
-    result, i, j = [], 0, 0
-    while i < one[1] and j < two[1]:
-        if one[0][i] < two[0][j]:
-            result.append(one[0][i])
-            i += 1
-        else:
-            result.append(two[0][j])
-            j += 1
-
-    return result + one[0][i:] + two[0][j:]
-
-
 def merge_sort(array: List[int]) -> List[int]:
     """
     ## Merge Sort
@@ -50,3 +28,25 @@ def merge_sort(array: List[int]) -> List[int]:
         one=(merge_sort(array[:middle]), middle),
         two=(merge_sort(array[middle:]), length - middle),
     )
+
+
+def merge_arrays(one: Tuple[List[int], int], two: Tuple[List[int], int]) -> List[int]:
+    """Used for merging two halves; merges the two sorted sub-arrays into one.
+
+    :param first: a tuple of sub-array and length of array
+    :type first: tuple[list[int], int]
+    :param second: a tuple of sub-array and length of array
+    :type second: tuple[list[int], int]
+    :return: returned the one array merged of two this array
+    :rtype: list[int]
+    """
+    result, i, j = [], 0, 0
+    while i < one[1] and j < two[1]:
+        if one[0][i] < two[0][j]:
+            result.append(one[0][i])
+            i += 1
+        else:
+            result.append(two[0][j])
+            j += 1
+
+    return result + one[0][i:] + two[0][j:]
