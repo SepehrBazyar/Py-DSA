@@ -3,6 +3,7 @@ from typing import List
 
 def insertion_sort(array: List[int]) -> List[int]:
     """
+    ## Insertion Sort
     Insertion sort is used when number of elements is small.
 
     It can also be useful when input array is almost sorted,

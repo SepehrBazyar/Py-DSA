@@ -3,6 +3,7 @@ from typing import List
 
 def selection_sort(array: List[int]) -> List[int]:
     """
+    ## Selection Sort
     The selection sort algorithm sorts an array by repeatedly finding the minimum item
     from unsorted part and putting it at the beginning.
 

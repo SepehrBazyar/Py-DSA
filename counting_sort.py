@@ -22,6 +22,7 @@ def minimum_maximum(accumulator: Tuple[int, int], element: int) -> Tuple[int, in
 
 def counting_sort(array: List[int]) -> List[int]:
     """
+    ## Counting Sort
     Counting sort is efficient if the range of input data
     is not significantly greater than the number of objects to be sorted.
 
