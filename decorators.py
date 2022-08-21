@@ -3,7 +3,7 @@ from typing import Callable
 from timeit import default_timer as timer
 
 
-def process_timer(function: Callable[[list], list]) -> Callable[[list], list]:
+def process_timer(function: Callable[[list], list]):
     """decorator for processing timer sorting algorithm functions
 
     :param function: function of sorting algorithms

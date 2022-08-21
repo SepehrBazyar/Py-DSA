@@ -22,7 +22,7 @@ def counting_sort(array: List[int]) -> List[int]:
     :return: list of sorted integer number with counting sort algorithm
     :rtype: list[int]
     """
-    minimum, maximum = reduce(minimum_maximum, array, (array[0], array[0]))
+    minimum, maximum = reduce(_minimum_maximum, array, (array[0], array[0]))
     counter = {i: 0 for i in range(minimum, maximum + 1)}  # dictionary comprehension
     counter.update(Counter(array))
 
@@ -32,7 +32,7 @@ def counting_sort(array: List[int]) -> List[int]:
     return result
 
 
-def minimum_maximum(accumulator: Tuple[int, int], element: int) -> Tuple[int, int]:
+def _minimum_maximum(accumulator: Tuple[int, int], element: int) -> Tuple[int, int]:
     """Used in reduce function to find minimum and maximum number in one loop.
 
     :param accumulator: tuple of minimum and maximum number

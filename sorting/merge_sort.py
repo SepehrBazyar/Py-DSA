@@ -27,13 +27,13 @@ def merge_sort(array: List[int]) -> List[int]:
         return array
 
     middle = length // 2
-    return merge_arrays(
+    return _merge_arrays(
         one=(merge_sort(array[:middle]), middle),
         two=(merge_sort(array[middle:]), length - middle),
     )
 
 
-def merge_arrays(one: Tuple[List[int], int], two: Tuple[List[int], int]) -> List[int]:
+def _merge_arrays(one: Tuple[List[int], int], two: Tuple[List[int], int]) -> List[int]:
     """Used for merging two halves; merges the two sorted sub-arrays into one.
 
     :param first: a tuple of sub-array and length of array
