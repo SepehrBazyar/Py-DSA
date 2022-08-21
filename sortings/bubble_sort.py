@@ -1,6 +1,9 @@
 from typing import List
 
+from ..decorators import process_timer
 
+
+@process_timer
 def bubble_sort(array: List[int]) -> List[int]:
     """
     ## Bubble Sort

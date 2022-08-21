@@ -1,6 +1,9 @@
 from typing import List, Tuple
 
+from ..decorators import process_timer
 
+
+@process_timer
 def merge_sort(array: List[int]) -> List[int]:
     """
     ## Merge Sort
