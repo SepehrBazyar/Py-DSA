@@ -16,8 +16,8 @@ def process_timer(function: Callable[[list], list]):
     def wrapper(*args, **kwargs):
         start_time = timer()
         result = function(*args, **kwargs)
-        process_time = (timer() - start_time) * 1_000_000  # convert to seconds
-        print(f"{function.__name__}[{len(result)}]: {process_time}s")
+        process_time = (timer() - start_time) * 1_000_000  # convert to microseconds
+        print(f"{function.__name__}[{len(result)}]: {process_time} microseconds")
         return result
 
     return wrapper
