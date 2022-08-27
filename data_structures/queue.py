@@ -1,3 +1,4 @@
+from collections import deque
 from typing import Optional, List
 
 from exceptions import UnderflowError
@@ -10,7 +11,8 @@ class Queue:
     With a queue the least recently added item is removed first.
     """
     def __init__(self, length: int):
-        """Initialize the queue list with front and rear pointers.
+        """
+        Initialize the queue list with front and rear pointers.
 
         :param length: the maximum length size of this queue
         :type length: int
@@ -50,3 +52,13 @@ class Queue:
 
         self.__queue[self.__rear] = value
         self.__rear += 1
+
+    def __repr__(self) -> str:
+        """
+        Representation the queue list.
+
+        :return: representation string
+        :rtype: str
+        """
+        items = (str(elem) for elem in self.__queue[::-1] if elem is not None)
+        return f"-> _ {' | '.join(items)} ->"
