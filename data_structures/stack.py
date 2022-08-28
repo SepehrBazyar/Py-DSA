@@ -70,7 +70,7 @@ class Stack:
         :return: top integer in stack
         :rtype: int
         """
-        if self.__number == 0:
+        if self.is_empty:
             raise UnderflowError("Queue is empty.")
 
         return self.__stack[self.__number - 1]
