@@ -26,7 +26,7 @@ class Queue:
         The items are popped in the same order in which they are pushed.
         Time Complexity: `O(1)`
 
-        :raises UnderflowError: If the queue is empty, then it's Underflow exception
+        :raises UnderflowError: if the queue is empty, then it's Underflow exception
         :return: the value to be popped
         :rtype: int
         """
@@ -50,8 +50,66 @@ class Queue:
         if self.__number >= self.__length:
             raise OverflowError("Queue is full.")
 
-        self.__queue[(self.__number + self.__first) % self.__length] = value
+        self.__queue[(self.__first + self.__number) % self.__length] = value
         self.__number += 1
+
+    @property
+    def length(self) -> int:
+        """
+        The maximum length of the queue.
+
+        :return: the maximum size number
+        :rtype: int
+        """
+        return self.__length
+
+    @property
+    def front(self) -> int:
+        """
+        First In item added to the queue.
+
+        :raises UnderflowError: If the queue is empty
+        :return: first integer into queue
+        :rtype: int
+        """
+        if self.__number == 0:
+            raise UnderflowError("Queue is empty.")
+
+        return self.__queue[self.__first]
+
+    @property
+    def rear(self) -> int:
+        """
+        Last In item added to the queue.
+
+        :raises UnderflowError: If the queue is empty
+        :return: last integer into queue
+        :rtype: int
+        """
+        if self.__number == 0:
+            raise UnderflowError("Queue is empty.")
+
+        return self.__queue[(self.__first + self.__number - 1) % self.__length]
+
+    @property
+    def is_empty(self) -> bool:
+        """
+        Boolean indicating whether the queue is empty.
+
+        :return: flag to check if queue is empty
+        :rtype: bool
+        """
+        return self.__number == 0
+
+    @property
+    def is_full(self) -> bool:
+        """
+        Boolean indicating whether the queue is full.
+
+        :return: flag to check if queue is full
+        :rtype: bool
+        """
+        return self.__number == self.__length
 
     def __repr__(self) -> str:
         """
@@ -62,6 +120,6 @@ class Queue:
         """
         items = []
         for index in range(self.__number):
-            items.append(str(self.__queue[(index + self.__first) % self.__length]))
+            items.append(str(self.__queue[(self.__first + index) % self.__length]))
 
         return f"-> _ {' | '.join(reversed(items))} ->"
