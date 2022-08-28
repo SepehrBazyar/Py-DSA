@@ -54,6 +54,16 @@ class Queue:
         self.__number += 1
 
     @property
+    def size(self) -> int:
+        """
+        The number size of queue elements.
+
+        :return: the queue size number
+        :rtype: int
+        """
+        return self.__number
+
+    @property
     def length(self) -> int:
         """
         The maximum length of the queue.

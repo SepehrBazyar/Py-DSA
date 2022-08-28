@@ -52,6 +52,16 @@ class Stack:
         self.__number += 1
 
     @property
+    def size(self) -> int:
+        """
+        The number size of stack elements.
+
+        :return: the stack size number
+        :rtype: int
+        """
+        return self.__number
+
+    @property
     def length(self) -> int:
         """
         The maximum length of the queue.
