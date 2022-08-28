@@ -33,9 +33,8 @@ class Stack:
         if self.is_empty:
             raise UnderflowError("Stack is empty.")
 
-        item = self.__stack[self.__number - 1]
         self.__number -= 1
-        return item
+        return self.__stack[self.__number]
 
     def push(self, value: int):
         """
