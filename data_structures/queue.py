@@ -12,7 +12,7 @@ class Queue:
     """
     def __init__(self, length: int):
         """
-        Initialize the queue list with front and rear pointers.
+        Initialize the queue list with fir and number pointers.
 
         :param length: the maximum length size of this queue
         :type length: int
