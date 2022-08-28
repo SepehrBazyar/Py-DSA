@@ -30,7 +30,7 @@ class Queue:
         :return: the value to be popped
         :rtype: int
         """
-        if self.__number == 0:
+        if self.is_empty:
             raise UnderflowError("Queue is empty.")
 
         item, self.__queue[self.__first] = self.__queue[self.__first], None
@@ -47,7 +47,7 @@ class Queue:
         :param value: the value to be pushed
         :type value: int
         """
-        if self.__number >= self.__length:
+        if self.is_full:
             raise OverflowError("Queue is full.")
 
         self.__queue[(self.__first + self.__number) % self.__length] = value
