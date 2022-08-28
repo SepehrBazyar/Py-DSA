@@ -30,11 +30,10 @@ class Queue:
         :return: the value to be popped
         :rtype: int
         """
-        item = self.__queue[self.__front]
-        if item is None:
+        if self.__front == self.__rear:
             raise UnderflowError("Queue is empty.")
 
-        self.__queue[self.__front] = None
+        item, self.__queue[self.__front] = self.__queue[self.__front], None
         self.__front += 1
         return item
 
