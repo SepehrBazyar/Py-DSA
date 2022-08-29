@@ -1,6 +1,6 @@
 from typing import List
 
-from decorators import process_timer
+from ..decorators import process_timer
 
 
 @process_timer

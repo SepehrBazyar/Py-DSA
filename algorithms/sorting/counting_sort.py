@@ -2,7 +2,7 @@ from collections import Counter
 from typing import List, Tuple
 from functools import reduce
 
-from decorators import process_timer
+from ..decorators import process_timer
 
 
 @process_timer

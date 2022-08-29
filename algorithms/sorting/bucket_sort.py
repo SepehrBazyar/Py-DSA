@@ -1,7 +1,7 @@
 from typing import List, Callable
 from string import ascii_lowercase
 
-from decorators import process_timer
+from ..decorators import process_timer
 from .insertion_sort import insertion_sort
 
 
