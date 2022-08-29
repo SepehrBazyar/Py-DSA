@@ -58,8 +58,11 @@ class LinkedList:
         :type node: _Node
         """
         self.__length -= 1
-        node.previous.next = node.next
-        node.next.previous = node.previous
+        if node.previous is not None:
+            node.previous.next = node.next
+
+        if node.next is not None:
+            node.next.previous = node.previous
 
     def search(self, value: int) -> Optional["_Node"]:
         """
@@ -124,7 +127,10 @@ class LinkedList:
         :rtype: _Node
         """
         new = _Node(value, previous=node, next=node.next)
-        node.next, node.next.previous = new, new
+        node.next = new
+        if new.next is not None:
+            new.next.previous = new
+
         return new
 
     @staticmethod
@@ -140,7 +146,10 @@ class LinkedList:
         :rtype: _Node
         """
         new = _Node(value, next=node, previous=node.previous)
-        node.previous, node.previous.next = new, new
+        node.previous = new
+        if new.previous is not None:
+            new.previous.next = new
+
         return new
 
     def __len__(self) -> int:
