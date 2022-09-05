@@ -31,6 +31,17 @@ class BinaryTree:
         """
         self.__root = _Node(value)
 
+    def search(self, value: int) -> Optional["_Node"]:
+        """
+        Search the binary tree with an integer value.
+
+        :param value: integer value to search and find node
+        :type value: int
+        :return: returned node object if exist and find value
+        :rtype: Optional[_Node]
+        """
+        return self._search(value=value, node=self.__root)
+
     @property
     def root(self) -> "_Node":
         """
@@ -54,6 +65,31 @@ class BinaryTree:
             raise TypeError("Node must be a node objects without parent.")
 
         self.__root = node
+
+    def _search(
+        self,
+        value: int,
+        *,
+        node: Optional["_Node"] = None,
+    ) -> Optional["_Node"]:
+        """
+        Protected Recursive Search Utility Method in binary tree.
+
+        :param value: integer value to search and find node
+        :type value: int
+        :param node: node object of subtree root, defaults to None
+        :type node: Optional[_Node], optional
+        :return: returned node object if exist and find value
+        :rtype: Optional[_Node]
+        """
+        if node is None:
+            return
+        if value < node.data:
+            return self._search(value=value, node=node.left)
+        if value > node.data:
+            return self._search(value=value, node=node.right)
+
+        return node
 
     def _in_order(self, node: Optional["_Node"] = None) -> List[int]:
         """
