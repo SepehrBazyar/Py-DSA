@@ -88,14 +88,11 @@ class BinaryTree:
         :return: returned new node object created after inserted
         :rtype: _Node
         """
-        child = node.left if value < node.data else node.right
+        direction = "left" if value < node.data else "right"
+        child = getattr(node, direction)
         if child is None:  # base case
             new = _Node(data=value, parent=node)
-            if value < node.data:
-                node.left = new
-            else:
-                node.right = new
-
+            setattr(node, child, new)
             return new
 
         return self._insert(value=value, node=child)
