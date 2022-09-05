@@ -31,6 +31,17 @@ class BinaryTree:
         """
         self.__root = _Node(value)
 
+    def insert(self, value: int) -> "_Node":
+        """
+        Insert the new integer value in binary tree.
+
+        :param value: integer value to inserted in binary tree
+        :type value: int
+        :return: returned new node object created after inserted
+        :rtype: _Node
+        """
+        return self._insert(value=value, node=self.__root)
+
     def search(self, value: int) -> Optional["_Node"]:
         """
         Search the binary tree with an integer value.
@@ -66,6 +77,29 @@ class BinaryTree:
 
         self.__root = node
 
+    def _insert(self, value: int, *, node: Optional["_Node"] = None) -> "_Node":
+        """
+        Protected Recursive Insert Utility Method in binary tree.
+
+        :param value: integer value to inserted in binary tree
+        :type value: int
+        :param node: node object of subtree root, defaults to None
+        :type node: Optional[_Node], optional
+        :return: returned new node object created after inserted
+        :rtype: _Node
+        """
+        child = node.left if value < node.data else node.right
+        if child is None:  # base case
+            new = _Node(data=value, parent=node)
+            if value < node.data:
+                node.left = new
+            else:
+                node.right = new
+
+            return new
+
+        return self._insert(value=value, node=child)
+
     def _search(
         self,
         value: int,
@@ -82,14 +116,14 @@ class BinaryTree:
         :return: returned node object if exist and find value
         :rtype: Optional[_Node]
         """
-        if node is None:
+        if node is None:  # base case
             return
         if value < node.data:
             return self._search(value=value, node=node.left)
         if value > node.data:
             return self._search(value=value, node=node.right)
 
-        return node
+        return node  # base case
 
     def _in_order(self, node: Optional["_Node"] = None) -> List[int]:
         """
