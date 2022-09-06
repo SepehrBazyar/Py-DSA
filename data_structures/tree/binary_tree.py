@@ -72,6 +72,24 @@ class BinaryTree:
         """
         return self._search(value=value, node=self.__root)
 
+    def lca(self, first: int, second: int, /) -> Optional["_Node"]:
+        """
+        Lowest common ancestor of the given two values.
+
+        :param first: positional argument integer value to find lca
+        :type first: int
+        :param second: positional argument integer value to find lca
+        :type second: int
+        :return: returned node object if exist and find lca
+        :rtype: Optional[_Node]
+        """
+        try:
+            result = self._lca(first, second, sub_root=self.__root)
+        except ValueError:
+            result = None
+
+        return result
+
     @property
     def minimum(self) -> int:
         """
@@ -186,6 +204,37 @@ class BinaryTree:
             return self._search(value=value, node=node.right)
 
         return node  # base case
+
+    def _lca(
+        self,
+        first: int,
+        second: int,
+        /,
+        *,
+        sub_root: Optional["_Node"] = None,
+    ) -> "_Node":
+        """
+        Protected Recursive LCA Utility Method in binary tree.
+
+        :param first: positional argument integer value to find lca
+        :type first: int
+        :param second: positional argument integer value to find lca
+        :type second: int
+        :param sub_root: node object of subtree root, defaults to None
+        :type sub_root: Optional[_Node], optional
+        :raises ValueError: if not found lca for this two value
+        :return: returned node object if exist and find value
+        :rtype: _Node
+        """
+        if sub_root is None:
+            raise ValueError("Two items have no common ancestor.")
+
+        one, two = sub_root.data - first, sub_root.data - second
+        if one * two <= 0:  # base case
+            return sub_root
+
+        child = sub_root.right if one < 0 else sub_root.left
+        return self._lca(first, second, sub_root=child)
 
     def _in_order(self, node: Optional["_Node"] = None) -> List[int]:
         """
