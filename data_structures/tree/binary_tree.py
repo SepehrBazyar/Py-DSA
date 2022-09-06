@@ -42,6 +42,25 @@ class BinaryTree:
         """
         return self._insert(value=value, node=self.__root)
 
+    def delete(self, node: "_Node"):
+        """
+        Delete the node object from binary tree.
+
+        :param node: node object to deletion
+        :type node: _Node
+        """
+        if node.right is None:
+            self._replace(old=node, new=node.left)
+        elif node.left is None:
+            self._replace(old=node, new=node.right)
+        else:
+            child = node.left
+            while child.right is not None:
+                child = child.right
+
+            node.data = child.data
+            self.delete(child)
+
     def search(self, value: int) -> Optional["_Node"]:
         """
         Search the binary tree with an integer value.
@@ -76,6 +95,24 @@ class BinaryTree:
             raise TypeError("Node must be a node objects without parent.")
 
         self.__root = node
+
+    def _replace(self, *, old: "_Node", new: "_Node"):
+        """
+        Replacement Function to replace old node with new node.
+
+        :param old: node object to replaced with new node
+        :type old: _Node
+        :param new: node object to replaced with old node
+        :type new: _Node
+        """
+        if old.parent is None:
+            self.__root = new
+        elif old.parent.left is old:
+            old.parent.left = new
+        else:
+            old.parent.right = new
+
+        new.parent = old.parent
 
     def _insert(self, value: int, *, node: "_Node") -> "_Node":
         """
