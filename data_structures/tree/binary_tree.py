@@ -73,6 +73,34 @@ class BinaryTree:
         return self._search(value=value, node=self.__root)
 
     @property
+    def minimum(self) -> int:
+        """
+        Minimum value in the binary tree.
+
+        :return: minimum integer values
+        :rtype: int
+        """
+        node = self.__root
+        while node.left is not None:
+            node = node.left
+
+        return node.data
+
+    @property
+    def maximum(self) -> int:
+        """
+        Maximum value in the binary tree.
+
+        :return: maximum integer values
+        :rtype: int
+        """
+        node = self.__root
+        while node.right is not None:
+            node = node.right
+
+        return node.data
+
+    @property
     def root(self) -> "_Node":
         """
         Getter for the root of the binary tree.
