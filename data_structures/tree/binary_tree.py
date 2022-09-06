@@ -77,22 +77,22 @@ class BinaryTree:
 
         self.__root = node
 
-    def _insert(self, value: int, *, node: Optional["_Node"] = None) -> "_Node":
+    def _insert(self, value: int, *, node: "_Node") -> "_Node":
         """
         Protected Recursive Insert Utility Method in binary tree.
 
         :param value: integer value to inserted in binary tree
         :type value: int
-        :param node: node object of subtree root, defaults to None
-        :type node: Optional[_Node], optional
+        :param node: node object of subtree root
+        :type node: _Node
         :return: returned new node object created after inserted
         :rtype: _Node
         """
         direction = "left" if value < node.data else "right"
-        child = getattr(node, direction)
+        child: Optional[_Node] = getattr(node, direction)
         if child is None:  # base case
             new = _Node(data=value, parent=node)
-            setattr(node, child, new)
+            setattr(node, direction, new)
             return new
 
         return self._insert(value=value, node=child)
