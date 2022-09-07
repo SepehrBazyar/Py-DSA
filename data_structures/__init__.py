@@ -6,6 +6,7 @@ from .queue import Queue
 from .linked_list import LinkedList
 from .tree import (
     BinaryTree,
+    Trie,
 )
 
 
@@ -14,4 +15,5 @@ __all__ = (
     "Queue",
     "LinkedList",
     "BinaryTree",
+    "Trie",
 )
