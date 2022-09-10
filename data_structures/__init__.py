@@ -4,10 +4,7 @@ Models of the Data Structures are implemented
 from .stack import Stack
 from .queue import Queue
 from .linked_list import LinkedList
-from .tree import (
-    BinaryTree,
-    Trie,
-)
+from .tree import *
 
 
 __all__ = (
@@ -16,4 +13,6 @@ __all__ = (
     "LinkedList",
     "BinaryTree",
     "Trie",
+    "MinHeap",
+    "MaxHeap",
 )
