@@ -22,13 +22,7 @@ def process_timer(function: Callable[[list], list]):
         start_time = timer()
         result = function(*args, **kwargs)
         process_time = (timer() - start_time) * 1_000_000  # convert to microseconds
-
-        try:
-            length = len(result)
-        except TypeError:
-            length = kwargs.get("end", len(kwargs["array"])) - kwargs.get("start", 0)
-
-        logger.info(f"{function.__name__}[{length}]: {process_time:.4f} μs")
+        logger.info(f"{function.__name__}[{len(result)}]: {process_time:.4f} μs")
         return result
 
     return wrapper
