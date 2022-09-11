@@ -57,7 +57,7 @@ class _AbstractHeap(ABC):
         self._heap[0] = self._heap[-1]
         self._heap.pop()
         self._count -= 1
-        self.bubble_down(index=1)
+        self.bubble_down(index=0)
         return result
 
     @staticmethod
@@ -186,7 +186,7 @@ class MinHeap(_AbstractHeap):
             child, left, right = index, self.left_child(index), self.right_child(index)
             if self._heap[left] < self._heap[child]:
                     child = left
-            if right < self._count() and self._heap[right] < self._heap[child]:
+            if right < self._count and self._heap[right] < self._heap[child]:
                     child = right
 
             if child == index:
@@ -225,7 +225,7 @@ class MaxHeap(_AbstractHeap):
             child, left, right = index, self.left_child(index), self.right_child(index)
             if self._heap[left] > self._heap[child]:
                     child = left
-            if right < self._count() and self._heap[right] > self._heap[child]:
+            if right < self._count and self._heap[right] > self._heap[child]:
                     child = right
 
             if child == index:
