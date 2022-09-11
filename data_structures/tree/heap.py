@@ -23,11 +23,11 @@ class _AbstractHeap(ABC):
         :param build_down: set bubble function builder, defaults to True
         :type build_down: bool, optional
         """
-        self.__heap, self.__count = list(args), len(args)
+        self._heap, self._count = list(args), len(args)
         if build_down:
-            bubble_func, indexes = self.bubble_down, range(self.__count - 1, -1, -1)
+            bubble_func, indexes = self.bubble_down, range(self._count - 1, -1, -1)
         else:
-            bubble_func, indexes = self.bubble_up, range(self.__count)
+            bubble_func, indexes = self.bubble_up, range(self._count)
 
         for index in indexes:
             bubble_func(index=index)
@@ -39,9 +39,9 @@ class _AbstractHeap(ABC):
         :param item: new integer item value to inserted
         :type item: int
         """
-        self.__heap.append(item)
-        self.bubble_up(index=self.__count)
-        self.__count += 1
+        self._heap.append(item)
+        self.bubble_up(index=self._count)
+        self._count += 1
 
     def delete(self) -> int:
         """
@@ -53,10 +53,10 @@ class _AbstractHeap(ABC):
         if self.is_empty:
             raise Exception("Heap is empty.")
 
-        result = self.__heap[0]
-        self.__heap[0] = self.__heap[-1]
-        self.__heap.pop()
-        self.__count -= 1
+        result = self._heap[0]
+        self._heap[0] = self._heap[-1]
+        self._heap.pop()
+        self._count -= 1
         self.bubble_down(index=1)
         return result
 
@@ -115,7 +115,7 @@ class _AbstractHeap(ABC):
         if self.is_empty:
             raise Exception("Heap is empty.")
 
-        return self.__heap[0]
+        return self._heap[0]
 
     @property
     def is_empty(self) -> bool:
@@ -125,7 +125,18 @@ class _AbstractHeap(ABC):
         :return: flag to check if heap is empty
         :rtype: bool
         """
-        return self.__count == 0
+        return self._count == 0
+
+    def _swap(self, i: int, j: int, /):
+        """
+        Swap two nodes in the heap with indexes.
+
+        :param i: index of first node to swap
+        :type i: int
+        :param j: index of second node to swap
+        :type j: int
+        """
+        self._heap[i], self._heap[j] = self._heap[j], self._heap[i]
 
     def __len__(self) -> int:
         """
@@ -134,7 +145,7 @@ class _AbstractHeap(ABC):
         :return: number of element items in the heap.
         :rtype: int
         """
-        return self.__count
+        return self._count
 
     def __repr__(self) -> str:
         """
@@ -143,18 +154,82 @@ class _AbstractHeap(ABC):
         :return: representation string
         :rtype: str
         """
-        return ", ".join(str(item) for item in self.__heap)
+        return ", ".join(str(item) for item in self._heap)
 
 
 class MinHeap(_AbstractHeap):
     """
-    _summary_
+    # Minimum Binary Heap
+    The key at root must be minimum among all keys present in Binary Heap.
+    the same property must be recursively true for all nodes in Binary Tree.
     """
-    pass
+    def bubble_up(self, index: int):
+        """
+        Bubble Up the heap node with the given index while less than the parent.
+
+        :param index: index of element to bubble up
+        :type index: int
+        """
+        while 0 < index and self._heap[index] < self._heap[self.parent(index)]:
+            parent = self.parent(index=index)
+            self._swap(index, parent)
+            index = parent
+
+    def bubble_down(self, index: int):
+        """
+        Bubble Down the heap node with the given index while less than the child's.
+
+        :param index: index of element to bubble down
+        :type index: int
+        """
+        while self.left_child(index=index) < self._count:
+            child, left, right = index, self.left_child(index), self.right_child(index)
+            if self._heap[left] < self._heap[child]:
+                    child = left
+            if right < self._count() and self._heap[right] < self._heap[child]:
+                    child = right
+
+            if child == index:
+                    break
+
+            self._swap(index, child)
+            index = child
 
 
 class MaxHeap(_AbstractHeap):
     """
-    _summary_
+    # Maximum Binary Heap
+    The key at root must be maximum among all keys present in Binary Heap.
+    the same property must be recursively true for all nodes in Binary Tree.
     """
-    pass
+    def bubble_up(self, index: int):
+        """
+        Bubble Up the heap node with the given index while greater than the parent.
+
+        :param index: index of element to bubble up
+        :type index: int
+        """
+        while 0 < index and self._heap[index] > self._heap[self.parent(index)]:
+            parent = self.parent(index=index)
+            self._swap(index, parent)
+            index = parent
+
+    def bubble_down(self, index: int):
+        """
+        Bubble Down the heap node with the given index while greater than the parent.
+
+        :param index: index of element to bubble down
+        :type index: int
+        """
+        while self.left_child(index=index) < self._count:
+            child, left, right = index, self.left_child(index), self.right_child(index)
+            if self._heap[left] > self._heap[child]:
+                    child = left
+            if right < self._count() and self._heap[right] > self._heap[child]:
+                    child = right
+
+            if child == index:
+                    break
+
+            self._swap(index, child)
+            index = child
