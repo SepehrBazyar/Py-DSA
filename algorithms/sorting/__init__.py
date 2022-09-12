@@ -8,6 +8,7 @@ from .selection_sort import selection_sort
 from .merge_sort import merge_sort
 from .bucket_sort import bucket_sort
 from .heap_sort import heap_sort
+from .quick_sort import quick_sort
 
 
 __all__ = (
@@ -18,4 +19,5 @@ __all__ = (
     "merge_sort",
     "bucket_sort",
     "heap_sort",
+    "quick_sort",
 )
