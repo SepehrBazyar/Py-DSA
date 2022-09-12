@@ -152,6 +152,15 @@ class LinkedList:
 
         return new
 
+    def __iter__(self) -> "_Node":
+        """
+        Iterator linked list object.
+
+        :return: returned iterable object has `__next__` method
+        :rtype: _Node
+        """
+        return _Node(data=None, next=self.__head)
+
     def __len__(self) -> int:
         """
         Return the length of the linked list.
@@ -182,3 +191,18 @@ class _Node:
     data: int
     next: Optional["_Node"] = field(default=None, kw_only=True)
     previous: Optional["_Node"] = field(default=None, kw_only=True)
+
+    def __next__(self) -> int:
+        """
+        Next Pointer to Node object while traversing the linked list.
+
+        :raises StopIteration: Signal the end of next nodes.
+        :return: returned integer value of next node data.
+        :rtype: int
+        """
+        if (next_node := self.next) is not None:
+            self.next = next_node.next
+            return next_node.data
+
+        raise StopIteration
+ 
