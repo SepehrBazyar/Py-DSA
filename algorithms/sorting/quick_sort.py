@@ -1,3 +1,4 @@
+from random import randint
 from typing import Optional, List
 
 from ..decorators import process_timer
@@ -68,6 +69,9 @@ def partition(array: List[int], *, start: int, end: int) -> int:
     :return: index of the array pivot point into the array
     :rtype: int
     """
+    random = randint(start, end)
+    array[random], array[end] = array[end], array[random]  # swap random pivot
+
     pivot, left, right = array[end], start, end - 1
     while left <= right:
         while left < end and array[left] <= pivot:
