@@ -28,17 +28,6 @@ class Trie:
         """
         return self._insert(string=string, node=self.__root)
 
-    def search(self, string: str) -> bool:
-        """
-        Search a string into the Trie.
-
-        :param string: string to search into the Trie
-        :type string: str
-        :return: boolean result of search string in trie
-        :rtype: _type_
-        """
-        return self._search(string=string, node=self.__root)
-
     def delete(self, string: str):
         """
         Delete a string from the Trie.
@@ -47,6 +36,17 @@ class Trie:
         :type string: str
         """
         return self._delete(string=string, node=self.__root)
+
+    def __contains__(self, string: str) -> bool:
+        """
+        Search a string into the Trie with `in` keyword.
+
+        :param string: string to search into the Trie
+        :type string: str
+        :return: boolean result of search string in trie
+        :rtype: _type_
+        """
+        return self._search(string=string, node=self.__root)
 
     def _insert(self, *, string: str, node: "_Node", index: int = 0) -> "_Node":
         """
