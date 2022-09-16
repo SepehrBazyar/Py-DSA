@@ -1,7 +1,7 @@
-from random import randint
 from typing import Optional, List
 
 from ..decorators import process_timer
+from ..quick_select import partition
 
 
 @process_timer
@@ -48,39 +48,3 @@ def quick_sort(
     quick_sort(array, start=start, end=pivot - 1)
     quick_sort(array, start=pivot + 1, end=end)
     return array
-
-
-def partition(array: List[int], *, start: int, end: int) -> int:
-    """
-    The target of partitions is, given an array and an element x of an array as pivot,
-    put x at its correct position in a sorted array:
-
-        1- and put all smaller elements (smaller than x) before x,\n
-        2- and put all greater elements (greater than x) after x.
-
-    All this should be done in linear time.
-
-    :param array: list of integer numbers that we want applied pivot partition
-    :type array: list[int]
-    :param start: start point of the array in left direction
-    :type start: int
-    :param end: end point of the array in right direction
-    :type end: int
-    :return: index of the array pivot point into the array
-    :rtype: int
-    """
-    random = randint(start, end)
-    array[random], array[end] = array[end], array[random]  # swap random pivot
-
-    pivot, left, right = array[end], start, end - 1
-    while left <= right:
-        while left < end and array[left] <= pivot:
-            left += 1
-        while right >= start and array[right] > pivot:
-            right -= 1
-
-        if left < right:
-            array[left], array[right] = array[right], array[left]  # swap bubble
-
-    array[left], array[end] = array[end], array[left]  # swap pivot
-    return left
