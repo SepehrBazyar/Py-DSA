@@ -205,4 +205,3 @@ class _Node:
             return next_node.data
 
         raise StopIteration
- 
