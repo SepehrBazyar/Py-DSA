@@ -61,7 +61,8 @@ class _Node:
         if self.parent is self:  # base case
             return self
 
-        return self.parent.root
+        self.parent = self.parent.root  # here we user path compression trick
+        return self.parent
 
     def __add__(self, other: "_Node") -> int:
         """
