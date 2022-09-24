@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional, List
+from typing import Optional, List, Literal
 
 
 class BinaryTree:
@@ -29,7 +29,7 @@ class BinaryTree:
         :param value: root node data integer value of this binary tree
         :type value: int
         """
-        self.__root = _Node(value)
+        self._root = _Node(value)
 
     def insert(self, value: int) -> "_Node":
         """
@@ -40,7 +40,7 @@ class BinaryTree:
         :return: returned new node object created after inserted
         :rtype: _Node
         """
-        return self._insert(value=value, node=self.__root)
+        return self._insert(value=value, node=self._root)
 
     def delete(self, node: "_Node"):
         """
@@ -70,7 +70,7 @@ class BinaryTree:
         :return: returned node object if exist and find value
         :rtype: Optional[_Node]
         """
-        return self._search(value=value, node=self.__root)
+        return self._search(value=value, node=self._root)
 
     def lca(self, first: int, second: int, /) -> Optional["_Node"]:
         """
@@ -84,7 +84,7 @@ class BinaryTree:
         :rtype: Optional[_Node]
         """
         try:
-            result = self._lca(first, second, sub_root=self.__root)
+            result = self._lca(first, second, sub_root=self._root)
         except ValueError:
             result = None
 
@@ -98,7 +98,7 @@ class BinaryTree:
         :return: minimum integer values
         :rtype: int
         """
-        node = self.__root
+        node = self._root
         while node.left is not None:
             node = node.left
 
@@ -112,7 +112,7 @@ class BinaryTree:
         :return: maximum integer values
         :rtype: int
         """
-        node = self.__root
+        node = self._root
         while node.right is not None:
             node = node.right
 
@@ -126,7 +126,7 @@ class BinaryTree:
         :return: Node object of root of binary tree
         :rtype: _Node
         """
-        return self.__root
+        return self._root
 
     @root.setter
     def root(self, node: "_Node"):
@@ -140,7 +140,7 @@ class BinaryTree:
         if not isinstance(node, _Node) or node.parent is not None:
             raise TypeError("Node must be a node objects without parent.")
 
-        self.__root = node
+        self._root = node
 
     def _replace(self, *, old: "_Node", new: "_Node"):
         """
@@ -152,7 +152,7 @@ class BinaryTree:
         :type new: _Node
         """
         if old.parent is None:
-            self.__root = new
+            self._root = new
         elif old.parent.left is old:
             old.parent.left = new
         else:
@@ -174,9 +174,7 @@ class BinaryTree:
         direction = "left" if value < node.data else "right"
         child: Optional[_Node] = getattr(node, direction)
         if child is None:  # base case
-            new = _Node(data=value, parent=node)
-            setattr(node, direction, new)
-            return new
+            return self._set_node(value=value, node=node, direction=direction)
 
         return self._insert(value=value, node=child)
 
@@ -236,6 +234,29 @@ class BinaryTree:
         child = sub_root.right if one < 0 else sub_root.left
         return self._lca(first, second, sub_root=child)
 
+    def _set_node(
+        self,
+        value: int,
+        *,
+        node: "_Node",
+        direction: Literal["left", "right"],
+    ) -> "_Node":
+        """
+        Set the new node value object in binary tree.
+
+        :param value: integer value to inserted in binary tree
+        :type value: int
+        :param node: node object of parent for new node
+        :type node: _Node
+        :param direction: left or right child of parent
+        :type direction: Literal['left', 'right']
+        :return: new node object created
+        :rtype: _Node
+        """
+        new = _Node(data=value, parent=node)
+        setattr(node, direction, new)
+        return new
+
     def _in_order(self, node: Optional["_Node"] = None) -> List[int]:
         """
         In Order represents of this binary tree from root node
@@ -285,9 +306,9 @@ class BinaryTree:
         :return: representation string
         :rtype: str
         """
-        in_order = self._in_order(node=self.__root)
-        pre_order = self._pre_order(node=self.__root)
-        post_order = self._post_order(node=self.__root)
+        in_order = self._in_order(node=self._root)
+        pre_order = self._pre_order(node=self._root)
+        post_order = self._post_order(node=self._root)
         return f"{in_order=}\n{pre_order=}\n{post_order=}"
 
 
