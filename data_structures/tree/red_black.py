@@ -1,6 +1,6 @@
 from enum import Enum
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Optional, Literal
 
 
 from .binary_tree import BinaryTree, _Node
@@ -94,19 +94,7 @@ class RBBinaryTree(BinaryTree):
         :type node: _RBNode
         """
         right_child, node.right = node.right, node.right.left
-        if right_child.left is not None:
-            right_child.left.parent = node
-
-        right_child.parent = node.parent
-        if node.parent is None:
-            self._root = right_child
-        elif node.parent.left is node:
-            node.parent.left = right_child
-        else:
-            node.parent.right = right_child
-
-        right_child.left = node
-        node.parent = right_child
+        self.__rotate(node=node, child=right_child, direction="left")
 
     def _rotate_right(self, *, node: "_RBNode"):
         """
@@ -116,19 +104,39 @@ class RBBinaryTree(BinaryTree):
         :type node: _RBNode
         """
         left_child, node.left = node.left, node.left.right
-        if left_child.right is not None:
-            left_child.right.parent = node
+        self.__rotate(node=node, child=left_child, direction="right")
 
-        left_child.parent = node.parent
+    def __rotate(
+        self,
+        *,
+        node: "_RBNode",
+        child: "_RBNode",
+        direction: Literal["left", "right"],
+    ):
+        """
+        Private Rotate Method Red-Black Node Object.
+
+        :param node: node object rotate to right in red-black binary tree
+        :type node: _RBNode
+        :param child: child node object to replacement rotate
+        :type child: _RBNode
+        :param direction: left or right child of direction rotate
+        :type direction: Literal['left', 'right']
+        """
+        grand_child: Optional[_RBNode] = getattr(child, direction)
+        if grand_child is not None:
+            grand_child.parent = node
+
+        child.parent = node.parent
         if node.parent is None:
-            self._root = left_child
+            self._root = child
         elif node.parent.left is node:
-            node.parent.left = left_child
+            node.parent.left = child
         else:
-            node.parent.right = left_child
+            node.parent.right = child
 
-        left_child.right = node
-        node.parent = left_child
+        setattr(child, direction, node)
+        node.parent = child
 
 
 class _Color(Enum):
