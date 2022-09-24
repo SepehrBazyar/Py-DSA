@@ -46,17 +46,44 @@ class RBBinaryTree(BinaryTree):
     ) -> "_RBNode":
         new = _RBNode(data=value, parent=node)
         setattr(node, direction, new)
-        self._insert_fixup(new_node=new)
+        self._insert_fixup(node=new)
         return new
 
-    def _insert_fixup(self, new_node: "_RBNode"):
+    def _insert_fixup(self, *, node: "_RBNode"):
         """
         Restore Red-Black properties after insert new node.
 
-        :param new_node: new node object set in red-black binary tree
-        :type new_node: _RBNode
+        :param node: new node object set in red-black binary tree
+        :type node: _RBNode
         """
-        # TODO: implemented fixup after inserted
+        while node.parent.color is _Color.RED:
+            if node.parent.parent.left is node.parent:
+                temp: _RBNode = node.parent.parent.right
+                if temp.color is _Color.RED:
+                    node.parent.color, temp.color = _Color.BLACK, _Color.BLACK
+                    node.parent.parent.color = _Color.RED
+                    node = node.parent.parent
+                else:
+                    if node.parent.right is node:
+                        node = node.parent
+                        self._rotate_left(node=node)
+                    node.parent.color = _Color.BLACK
+                    node.parent.parent.color = _Color.RED
+                    self._rotate_right(node=node.parent.parent)
+            else:
+                temp: _RBNode = node.parent.parent.left
+                if temp.color is _Color.RED:
+                    node.parent.color, temp.color = _Color.BLACK, _Color.BLACK
+                    node.parent.parent.color = _Color.RED
+                    node = node.parent.parent
+                else:
+                    if node.parent.left is node:
+                        node = node.parent
+                        self._rotate_right(node=node)
+                    node.parent.color = _Color.BLACK
+                    node.parent.parent.color = _Color.RED
+                    self._rotate_left(node=node.parent.parent)
+
         self._root.color = _Color.BLACK
 
     def _rotate_left(self, *, node: "_RBNode"):
