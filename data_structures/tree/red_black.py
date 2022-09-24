@@ -57,29 +57,34 @@ class RBBinaryTree(BinaryTree):
         :type node: _RBNode
         """
         while node.parent.color is _Color.RED:
-            if node.parent.parent.left is node.parent:
-                temp: _RBNode = node.parent.parent.right
-                if temp.color is _Color.RED:
-                    node.parent.color, temp.color = _Color.BLACK, _Color.BLACK
-                    node.parent.parent.color = _Color.RED
-                    node = node.parent.parent
+            parent, grand_parent = node.parent, node.parent.parent
+            if grand_parent.left is parent:
+                other_child: _RBNode = grand_parent.right
+                if other_child.color is _Color.RED:
+                    grand_parent.color = _Color.RED
+                    other_child.color = _Color.BLACK
+                    parent.color = _Color.BLACK
+                    node = grand_parent
                 else:
-                    if node.parent.right is node:
-                        node = node.parent
+                    if parent.right is node:
+                        node = parent
                         self._rotate_left(node=node)
+
                     node.parent.color = _Color.BLACK
                     node.parent.parent.color = _Color.RED
                     self._rotate_right(node=node.parent.parent)
             else:
-                temp: _RBNode = node.parent.parent.left
-                if temp.color is _Color.RED:
-                    node.parent.color, temp.color = _Color.BLACK, _Color.BLACK
-                    node.parent.parent.color = _Color.RED
-                    node = node.parent.parent
+                other_child: _RBNode = grand_parent.left
+                if other_child.color is _Color.RED:
+                    grand_parent.color = _Color.RED
+                    other_child.color = _Color.BLACK
+                    parent.color = _Color.BLACK
+                    node = grand_parent
                 else:
-                    if node.parent.left is node:
-                        node = node.parent
+                    if parent.left is node:
+                        node = parent
                         self._rotate_right(node=node)
+
                     node.parent.color = _Color.BLACK
                     node.parent.parent.color = _Color.RED
                     self._rotate_left(node=node.parent.parent)
