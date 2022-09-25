@@ -58,16 +58,13 @@ class RBBinaryTree(BinaryTree):
         """
         while node.parent.color is _Color.RED:
             parent, grand_parent = node.parent, node.parent.parent
-            switcher: Dict[_RBNode, Literal["left", "right"]] = {
-                grand_parent.left: "right",
-                grand_parent.right: "left",
-            }
+            direction = "left" if grand_parent.right is parent else "right"
 
             node = self.__insert_fixup(
                 node=node,
                 parent=parent,
                 grand_parent=grand_parent,
-                case=switcher[parent],
+                case=direction,
             )
 
         self._root.color = _Color.BLACK
