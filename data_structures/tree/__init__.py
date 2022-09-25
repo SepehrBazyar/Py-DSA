@@ -5,6 +5,7 @@ from .binary_tree import BinaryTree
 from .trie import Trie
 from .heap import MinHeap, MaxHeap
 from .red_black import RBBinaryTree
+from .fenwick import FenwickTree
 
 
 __all__ = (
@@ -13,4 +14,5 @@ __all__ = (
     "MinHeap",
     "MaxHeap",
     "RBBinaryTree",
+    "FenwickTree",
 )
