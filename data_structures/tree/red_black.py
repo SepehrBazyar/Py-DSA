@@ -59,8 +59,8 @@ class RBBinaryTree(BinaryTree):
         while node.parent.color is _Color.RED:
             parent, grand_parent = node.parent, node.parent.parent
             if grand_parent.left is parent:
-                other_child: _RBNode = grand_parent.right
-                if other_child.color is _Color.RED:
+                other_child: Optional[_RBNode] = grand_parent.right
+                if other_child is not None and other_child.color is _Color.RED:
                     grand_parent.color = _Color.RED
                     other_child.color = _Color.BLACK
                     parent.color = _Color.BLACK
@@ -74,8 +74,8 @@ class RBBinaryTree(BinaryTree):
                     node.parent.parent.color = _Color.RED
                     self._rotate_right(node=node.parent.parent)
             else:
-                other_child: _RBNode = grand_parent.left
-                if other_child.color is _Color.RED:
+                other_child: Optional[_RBNode] = grand_parent.left
+                if other_child is not None and other_child.color is _Color.RED:
                     grand_parent.color = _Color.RED
                     other_child.color = _Color.BLACK
                     parent.color = _Color.BLACK
