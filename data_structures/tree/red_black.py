@@ -1,6 +1,6 @@
 from enum import Enum
 from dataclasses import dataclass, field
-from typing import Optional, Literal
+from typing import Optional, Dict, Tuple, Callable, Literal
 
 
 from .binary_tree import BinaryTree, _Node
@@ -58,40 +58,21 @@ class RBBinaryTree(BinaryTree):
         """
         while node.parent.color is _Color.RED:
             parent, grand_parent = node.parent, node.parent.parent
-            if grand_parent.left is parent:
-                other_child: Optional[_RBNode] = grand_parent.right
-                if other_child is not None and other_child.color is _Color.RED:
-                    grand_parent.color = _Color.RED
-                    other_child.color = _Color.BLACK
-                    parent.color = _Color.BLACK
-                    node = grand_parent
-                else:
-                    if parent.right is node:
-                        node = parent
-                        self._rotate_left(node=node)
+            switcher: Dict[_RBNode, Literal["left", "right"]] = {
+                grand_parent.left: "right",
+                grand_parent.right: "left",
+            }
 
-                    node.parent.color = _Color.BLACK
-                    node.parent.parent.color = _Color.RED
-                    self._rotate_right(node=node.parent.parent)
-            else:
-                other_child: Optional[_RBNode] = grand_parent.left
-                if other_child is not None and other_child.color is _Color.RED:
-                    grand_parent.color = _Color.RED
-                    other_child.color = _Color.BLACK
-                    parent.color = _Color.BLACK
-                    node = grand_parent
-                else:
-                    if parent.left is node:
-                        node = parent
-                        self._rotate_right(node=node)
-
-                    node.parent.color = _Color.BLACK
-                    node.parent.parent.color = _Color.RED
-                    self._rotate_left(node=node.parent.parent)
+            node = self.__insert_fixup(
+                node=node,
+                parent=parent,
+                grand_parent=grand_parent,
+                case=switcher[parent],
+            )
 
         self._root.color = _Color.BLACK
 
-    def _rotate_left(self, *, node: "_RBNode"):
+    def _rotate_left(self, node: "_RBNode"):
         """
         Left Rotate Red-Black Node Object.
 
@@ -101,7 +82,7 @@ class RBBinaryTree(BinaryTree):
         right_child, node.right = node.right, node.right.left
         self.__rotate(node=node, child=right_child, direction="left")
 
-    def _rotate_right(self, *, node: "_RBNode"):
+    def _rotate_right(self, node: "_RBNode"):
         """
         Right Rotate Red-Black Node Object.
 
@@ -142,6 +123,54 @@ class RBBinaryTree(BinaryTree):
 
         setattr(child, direction, node)
         node.parent = child
+
+    def __insert_fixup(
+        self,
+        *,
+        node: "_RBNode",
+        parent: "_RBNode",
+        grand_parent: "_RBNode",
+        case: Literal["left", "right"],
+    ) -> "_RBNode":
+        """
+        Private method to dynamic fixing up on node after insert.
+
+        :param node: node object fixup on it
+        :type node: _RBNode
+        :param parent: parent object of this node
+        :type parent: _RBNode
+        :param grand_parent: grand parent object of this node
+        :type grand_parent: _RBNode
+        :param case: direction case left or right child
+        :type case: Literal['left', 'right']
+        :return: node replacement to continues fixing up
+        :rtype: _RBNode
+        """
+        other_child: Optional[_RBNode] = getattr(grand_parent, case)
+        if other_child is None or other_child.color is _Color.BLACK:
+            switcher: Dict[
+                Literal["left", "right"],
+                Tuple[Callable[["_RBNode"], None], Callable[["_RBNode"], None]],
+            ] = {
+                "left": (self._rotate_left, self._rotate_right),
+                "right": (self._rotate_right, self._rotate_left),
+            }
+
+            rotates = switcher[case]
+            if getattr(parent, case) is node:
+                node = parent
+                rotates[1](node)
+
+            node.parent.color = _Color.BLACK
+            node.parent.parent.color = _Color.RED
+            rotates[0](node.parent.parent)
+        else:
+            parent.color = _Color.BLACK
+            other_child.color = _Color.BLACK
+            grand_parent.color = _Color.RED
+            node = grand_parent
+
+        return node
 
 
 class _Color(Enum):
