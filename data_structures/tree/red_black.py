@@ -56,7 +56,7 @@ class RBBinaryTree(BinaryTree):
         :param node: new node object set in red-black binary tree
         :type node: _RBNode
         """
-        while node.parent.color is _Color.RED:
+        while node.parent is not None and node.parent.color is _Color.RED:
             parent, grand_parent = node.parent, node.parent.parent
             direction = "left" if grand_parent.right is parent else "right"
 
