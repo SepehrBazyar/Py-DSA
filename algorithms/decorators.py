@@ -1,4 +1,4 @@
-import logging, logging.config
+import logging, logging.config  # noqa: E401
 from functools import wraps
 from typing import Callable
 from timeit import default_timer as timer

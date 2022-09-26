@@ -1,4 +1,4 @@
-from collections import deque
+from collections import deque  # noqa: F401
 from typing import Optional, List
 
 from exceptions import UnderflowError

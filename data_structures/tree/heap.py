@@ -1,4 +1,4 @@
-import heapq
+import heapq  # noqa: F401
 from abc import ABC, abstractmethod
 
 
