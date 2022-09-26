@@ -33,7 +33,7 @@ def quick_select(k: int, /, array: List[int]) -> int:
     if k - 1 < pivot:
         return quick_select(k, array=array[:pivot])
     elif k - 1 > pivot:
-        return quick_select(k - (pivot + 1), array=array[pivot + 1:])
+        return quick_select(k - (pivot + 1), array=array[pivot + 1 :])
 
     return array[pivot]  # base case
 

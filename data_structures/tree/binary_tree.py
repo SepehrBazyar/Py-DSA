@@ -22,6 +22,7 @@ class BinaryTree:
 
     ## Auxiliary Space: `O(n)`
     """
+
     def __init__(self, value: int):
         """
         Initialize the binary tree with a sequence of nodes.
@@ -270,7 +271,7 @@ class BinaryTree:
             return []
 
         return [*self._in_order(node.left), node.data, *self._in_order(node.right)]
- 
+
     def _pre_order(self, node: Optional["_Node"] = None) -> List[int]:
         """
         Pre Order represents of this binary tree from root node
@@ -315,6 +316,7 @@ class BinaryTree:
 @dataclass
 class _Node:
     """Node Class Model Contains Data Value with Parent and Left & Right Child's"""
+
     data: int
     parent: Optional["_Node"] = field(default=None, kw_only=True)
     right: Optional["_Node"] = field(default=None, kw_only=True)

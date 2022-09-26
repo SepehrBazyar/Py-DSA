@@ -16,7 +16,7 @@ def bucket_sort(
     Bucket sort is mainly useful when input is uniformly distributed over a range.
 
     `Counting Sort` can not be applied here as we use keys as index in counting sort;
-    Here keys are floating point numbers.  
+    Here keys are floating point numbers.
 
     :param array: list of string characters that we want sort
     :type array: list[str]

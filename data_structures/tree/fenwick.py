@@ -18,10 +18,11 @@ class FenwickTree:
     but the update operation takes `O(n)` time now.
     This works well if there are a large number of query operations
     but a very few number of update operations.
-    Could we perform both the query and update operations in `O(log(n))` time? 
+    Could we perform both the query and update operations in `O(log(n))` time?
     An alternative solution is Binary Indexed Tree, which also achieves `O(log(n))`
     time complexity for both operations.
     """
+
     def __init__(self, *args: int):
         """Initialize Fenwick Binary Indexed Tree with integer arguments"""
         self.__length = len(args)

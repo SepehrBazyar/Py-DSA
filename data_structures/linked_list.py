@@ -16,6 +16,7 @@ class LinkedList:
 
     ## Auxiliary Space: `O(n)`
     """
+
     def __init__(self, head: int):
         """
         Initialize the linked list with a list of nodes.
@@ -188,6 +189,7 @@ class LinkedList:
 @dataclass
 class _Node:
     """Node Class Model Contains Data Value with Next & Previous Pointers"""
+
     data: int
     next: Optional["_Node"] = field(default=None, kw_only=True)
     previous: Optional["_Node"] = field(default=None, kw_only=True)

@@ -11,6 +11,7 @@ class Stack:
     or First-In/Last-Out `(FILO)` manner.
     A new element is added at one end and an element is removed from that end only.
     """
+
     def __init__(self, length: int):
         """
         Initialize the stack list with a number pointer.
@@ -112,5 +113,5 @@ class Stack:
         :return: representation string
         :rtype: str
         """
-        items = (str(elem) for elem in self.__stack[:self.__number])
+        items = (str(elem) for elem in self.__stack[: self.__number])
         return f"{' | '.join(items)} <=>"

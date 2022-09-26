@@ -17,9 +17,9 @@ class RBBinaryTree(BinaryTree):
     where n is the total number of elements in the tree.
 
     That as each node requires only 1 bit of space to store the color information,
-    these types of trees show identical memory to the classic binary search tree. 
+    these types of trees show identical memory to the classic binary search tree.
 
-    Rules That Every Red-Black Tree Follows: 
+    Rules That Every Red-Black Tree Follows:
         * Every node has a color either red or black.
         * The root of the tree is always black.
         * There are no two adjacent red nodes.
@@ -34,6 +34,7 @@ class RBBinaryTree(BinaryTree):
     `O(log(n))` for all these operations. The height of a Red-Black tree is always
     `O(log(n))` where n is the number of nodes in the tree.
     """
+
     def __init__(self, value: int):
         self._root = _RBNode(value, color=_Color.BLACK)
 
@@ -172,6 +173,7 @@ class RBBinaryTree(BinaryTree):
 
 class _Color(Enum):
     """Enumeration Values of Color Data Variables"""
+
     RED = 1
     BLACK = 2
 
@@ -179,4 +181,5 @@ class _Color(Enum):
 @dataclass
 class _RBNode(_Node):
     """New Node Class Model Additional Color Field Red or Black"""
+
     color: _Color = field(default=_Color.RED, kw_only=True)

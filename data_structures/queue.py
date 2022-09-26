@@ -10,6 +10,7 @@ class Queue:
     Is a linear data structure that stores items in First In First Out `(FIFO)` manner;
     With a queue the least recently added item is removed first.
     """
+
     def __init__(self, length: int):
         """
         Initialize the queue list with fir and number pointers.

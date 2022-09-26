@@ -5,6 +5,7 @@ class HashTable(set):
     of buckets or slots. Its value is mapped to the bucket with the corresponding index.
     The key is unique and immutable.
     """
+
     def __contains__(self, __o: "String") -> bool:
         return super().__contains__(hash(__o))
 
@@ -17,7 +18,8 @@ class HashTable(set):
 
 class String(str):
     """Customized String Object Class to Override Hashing."""
-    __P, __MOD = 447, 10 ** 9 + 7
+
+    __P, __MOD = 447, 10**9 + 7
 
     def __hash__(self) -> int:
         """

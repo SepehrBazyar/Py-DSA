@@ -16,6 +16,7 @@ class _AbstractHeap(ABC):
 
     ## Auxiliary Space: `O(n)`
     """
+
     def __init__(self, *args: int, build_down: bool = True):
         """
         Initialize a new instance of a heap with the integer values.
@@ -163,6 +164,7 @@ class MinHeap(_AbstractHeap):
     The key at root must be minimum among all keys present in Binary Heap.
     the same property must be recursively true for all nodes in Binary Tree.
     """
+
     def bubble_up(self, index: int):
         """
         Bubble Up the heap node with the given index while less than the parent.
@@ -185,12 +187,12 @@ class MinHeap(_AbstractHeap):
         while self.left_child(index=index) < self._count:
             child, left, right = index, self.left_child(index), self.right_child(index)
             if self._heap[left] < self._heap[child]:
-                    child = left
+                child = left
             if right < self._count and self._heap[right] < self._heap[child]:
-                    child = right
+                child = right
 
             if child == index:
-                    break
+                break
 
             self._swap(index, child)
             index = child
@@ -202,6 +204,7 @@ class MaxHeap(_AbstractHeap):
     The key at root must be maximum among all keys present in Binary Heap.
     the same property must be recursively true for all nodes in Binary Tree.
     """
+
     def bubble_up(self, index: int):
         """
         Bubble Up the heap node with the given index while greater than the parent.
@@ -224,12 +227,12 @@ class MaxHeap(_AbstractHeap):
         while self.left_child(index=index) < self._count:
             child, left, right = index, self.left_child(index), self.right_child(index)
             if self._heap[left] > self._heap[child]:
-                    child = left
+                child = left
             if right < self._count and self._heap[right] > self._heap[child]:
-                    child = right
+                child = right
 
             if child == index:
-                    break
+                break
 
             self._swap(index, child)
             index = child

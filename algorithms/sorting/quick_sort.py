@@ -24,7 +24,7 @@ def quick_sort(
 
     The key process in quicks ort is a `partition()` function.
 
-    ### Time Complexity: 
+    ### Time Complexity:
         - Worst case time complexity is `O(n^2)`
         - Average case time complexity is `O(n*log(n))`
 

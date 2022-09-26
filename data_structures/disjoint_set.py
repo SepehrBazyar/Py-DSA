@@ -13,6 +13,7 @@ class DisjointSet:
     Two sets are called disjoint sets if they dont have any element in common,
     the intersection of sets is a null set.
     """
+
     def __init__(self, number: int):
         """
         Initialize a Disjoint Set Data Structure with n number nodes in tuple
@@ -41,6 +42,7 @@ class DisjointSet:
 
 class _Node:
     """Node Objects Value Data to Collect in Disjoint Set"""
+
     def __init__(self, label: int):
         """
         Initialize a Node object for Disjoint Set Data Structure
@@ -77,7 +79,7 @@ class _Node:
         if u is not v:  # u and v are not in the same component
             if v.rank > u.rank:  # making u the vertex with better rank
                 u, v = v, u  # swap
-            
+
             v.parent = u  # merging two components
             if u.rank == v.rank:
                 u.rank += 1  # updating maximum depth as rank

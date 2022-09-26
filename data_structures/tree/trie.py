@@ -13,6 +13,7 @@ class Trie:
     Using Trie, we can search the key in `O(k)` time.
     However, the penalty is on Trie storage requirements.
     """
+
     def __init__(self):
         """Initialize the Trie with a node root without parent nodes."""
         self.__root = _Node()
@@ -135,6 +136,7 @@ class Trie:
 
 class _Node:
     """Node Class Model Contains Boolean Mark End Word and List of Edge Objects"""
+
     def __init__(self, mark: bool = False, parent: Optional["_Node"] = None):
         """
         Initialize the Node object with mark flag and parent node.
@@ -154,7 +156,7 @@ class _Node:
         :raises Exception: if mark flag is false
         """
         if not self.is_end:
-            raise Exception("Node already isn't end of words.") 
+            raise Exception("Node already isn't end of words.")
 
         self.is_end = False
 
@@ -162,6 +164,7 @@ class _Node:
 @dataclass
 class _Edge:
     """Edge Class Model Contains Label Data and Start and End Node Objects"""
+
     label: str
     start: _Node
     end: _Node
