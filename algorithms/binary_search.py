@@ -28,7 +28,7 @@ def binary_search(
     :rtype: int
     """
     start = start if start is not None else 0
-    end = end if end is not None else len(array)
+    end = end if end is not None else len(array) - 1
     if start > end:
         raise ValueError("Item isn't present in the array.")
 
