@@ -1,6 +1,6 @@
 from pytest import mark
 
-from algorithms import insertion_sort
+from algorithms import bubble_sort
 from ...conftest import ODD_ARRAY, EVEN_ARRAY
 
 
@@ -15,5 +15,5 @@ from ...conftest import ODD_ARRAY, EVEN_ARRAY
         (EVEN_ARRAY.reversed, EVEN_ARRAY),
     ],
 )
-def test_insertion_sort(array, expected):
-    assert insertion_sort(array) == expected
+def test_bubble_sort(array, expected):
+    assert bubble_sort(array) == expected
