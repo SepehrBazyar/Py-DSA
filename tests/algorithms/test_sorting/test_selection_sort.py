@@ -15,5 +15,5 @@ from ...conftest import ODD_ARRAY, EVEN_ARRAY
         (EVEN_ARRAY.reversed, EVEN_ARRAY),
     ],
 )
-def test_bubble_sort(array, expected):
+def test_selection_sort(array, expected):
     assert selection_sort(array) == expected
