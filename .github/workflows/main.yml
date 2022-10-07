@@ -31,4 +31,4 @@ jobs:
       - name: Linting & Code Formatting
         run: pre-commit run --all-files
       - name: Run Test & Code Coverage
-        run: pytest --cov=algorithms --cov=data_structures --cov-fail-under=100 --cov-report=term-missing
+        run: bash scripts/test.sh
