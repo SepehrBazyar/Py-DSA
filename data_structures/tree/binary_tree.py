@@ -50,7 +50,10 @@ class BinaryTree:
         :param node: node object to deletion
         :type node: _Node
         """
-        if node.right is None:
+        if node.left is None and node.right is None:
+            direction = "left" if node.parent.left is node else "right"
+            setattr(node.parent, direction, None)
+        elif node.right is None:
             self._replace(old=node, new=node.left)
         elif node.left is None:
             self._replace(old=node, new=node.right)
@@ -284,7 +287,7 @@ class BinaryTree:
         if node is None:  # base case
             return []
 
-        return [node.data, *self._in_order(node.left), *self._in_order(node.right)]
+        return [node.data, *self._pre_order(node.left), *self._pre_order(node.right)]
 
     def _post_order(self, node: Optional["_Node"] = None) -> List[int]:
         """
@@ -298,9 +301,9 @@ class BinaryTree:
         if node is None:  # base case
             return []
 
-        return [*self._in_order(node.left), *self._in_order(node.right), node.data]
+        return [*self._post_order(node.left), *self._post_order(node.right), node.data]
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         """
         Three representation the binary tree as a string.
 
