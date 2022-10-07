@@ -32,5 +32,3 @@ jobs:
         run: pre-commit run --all-files
       - name: Run Test & Code Coverage
         run: bash scripts/test.sh
-      - name: Upload Coverage
-        uses: codecov/codecov-action@v3
