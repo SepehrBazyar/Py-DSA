@@ -8,7 +8,7 @@ from exceptions import UnderflowError
     "n",
     [i for i in range(1, 6)],
 )
-def test_stack(n):
+def test_queue(n):
     queue = Queue(length=n)
     assert queue.length == n
 
