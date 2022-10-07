@@ -122,7 +122,7 @@ class Queue:
         """
         return self.__number == self.__length
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         """
         Representation the queue list.
 
