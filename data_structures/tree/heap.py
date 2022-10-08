@@ -148,7 +148,7 @@ class _AbstractHeap(ABC):
         """
         return self._count
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         """
         Representation the heap as a string.
 
