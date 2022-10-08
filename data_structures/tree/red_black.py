@@ -50,6 +50,7 @@ class RBBinaryTree(BinaryTree):
         self._insert_fixup(node=new)
         return new
 
+    # TODO: Implement the Delete Fixup method
     def _insert_fixup(self, *, node: "_RBNode"):
         """
         Restore Red-Black properties after insert new node.
